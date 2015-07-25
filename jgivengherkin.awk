@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/local/bin/gawk -f
 BEGIN {
   INDENTATION="    "
   prev = ""
@@ -25,6 +25,7 @@ function remove_trailing_whitespace() {
 
 function process_line(beginning, previousEnding, allowAppending) {
   extract_string_variables();
+  extract_int_variables();
 
   convert_to_snake_case();
 
@@ -43,6 +44,13 @@ function extract_string_variables() {
     number = split($0, variables, "\"");
     prevVariable = "\"" variables[2] "\"";
     sub(/".*?"/, "")
+  }
+}
+
+function extract_int_variables() {
+  if (match($0, /[0-9*]/, variables)) {
+    prevVariable = variables[0];
+    sub(/[0-9*]/, "$");
   }
 }
 
@@ -66,6 +74,8 @@ function convert_to_snake_case() {
 /^and/ {
   process_line(INDENTATION INDENTATION $1"().", ".", 1)
 }
+
+#/[^0-9]*/ {print $2,$3}
 
 { if (output != "") {
     print output
