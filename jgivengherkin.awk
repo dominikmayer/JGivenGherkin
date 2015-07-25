@@ -4,6 +4,7 @@ BEGIN {
   prev = ""
   output = ""
   allowPreviousAppending = 0
+  prevVariable = ""
 }
 
 # We convert everything to lowercase so we don't have to worry about case in the Gherkin files.
@@ -22,32 +23,48 @@ function remove_trailing_whitespace() {
   sub(/^[ \t]+/, "")
 }
 
-function convert_to_snake_case(beginning, previousEnding, allowAppending) {
-  remove_keyword();
-  gsub(/ /, "_");
+function process_line(beginning, previousEnding, allowAppending) {
+  extract_string_variables();
+
+  convert_to_snake_case();
+
   if (allowPreviousAppending) {
     output = prev previousEnding;
   } else {
     output = prev
   }
-  prev = beginning $0"()";
+  prev = beginning $0"(" prevVariable ")";
   allowPreviousAppending = allowAppending;
+  prevVariable = "";
+}
+
+function extract_string_variables() {
+  if (match($0, /"/)) {
+    number = split($0, variables, "\"");
+    prevVariable = "\"" variables[2] "\"";
+    sub(/".*?"/, "")
+  }
+}
+
+function convert_to_snake_case() {
+  remove_keyword();
+  gsub(/ /, "_");
 }
 
 # Now we convert the scenario to a JGiven method.
 
 /^scenario: / {
     print "@Test"
-    convert_to_snake_case("public void ", "", 0);
+    process_line("public void ", "", 0);
     prev = prev " {\n"
 }
 
 /^(given|when|then)/ {
-  convert_to_snake_case(INDENTATION $1"().", ";\n", 1)
+  process_line(INDENTATION $1"().", ";\n", 1)
 }
 
 /^and/ {
-  convert_to_snake_case(INDENTATION INDENTATION $1"().", ".", 1)
+  process_line(INDENTATION INDENTATION $1"().", ".", 1)
 }
 
 { if (output != "") {
