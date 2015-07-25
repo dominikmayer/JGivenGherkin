@@ -3,7 +3,7 @@ BEGIN {
   INDENTATION="    "
   prev = ""
   output = ""
-  allowPreviousAppending = 0
+  #setPrev = false
 }
 
 # We convert everything to lowercase so we don't have to worry about case in the Gherkin files.
@@ -22,37 +22,33 @@ function remove_trailing_whitespace() {
   sub(/^[ \t]+/, "")
 }
 
-function convert_to_snake_case(beginning, previousEnding, allowAppending) {
+function convert_to_snake_case(beginning, ending) {
   remove_keyword();
   gsub(/ /, "_");
-  if (allowPreviousAppending) {
-    output = prev previousEnding;
-  } else {
-    output = prev
-  }
+  output = prev ending;
   prev = beginning $0"()";
-  allowPreviousAppending = allowAppending;
+  #setPrev = true;
 }
 
 # Now we convert the scenario to a JGiven method.
 
 /^scenario: / {
     print "@Test"
-    convert_to_snake_case("public void ", "", 0);
-    prev = prev " {\n"
+    convert_to_snake_case("public void ", "");
 }
 
 /^(given|when|then)/ {
-  convert_to_snake_case(INDENTATION $1"().", ";\n", 1)
+  convert_to_snake_case(INDENTATION $1"().", ";\n")
 }
 
 /^and/ {
-  convert_to_snake_case(INDENTATION INDENTATION $1"().", ".", 1)
+  convert_to_snake_case(INDENTATION INDENTATION $1"().", ".")
 }
 
-{ if (output != "") {
-    print output
-  }
+{ #if (setPrev == false) {prev = ""}
+  #if (prev != output) {print output}
+  #print "Prev: " prev
+  #print "Output: " output
 }
 
 END {
