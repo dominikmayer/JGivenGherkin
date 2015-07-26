@@ -1,4 +1,5 @@
 #!/usr/local/bin/gawk -f
+
 BEGIN {
   INDENTATION = "    ";
   prev = "";
@@ -109,6 +110,7 @@ function capitalize() {
 }
 
 END {
-  print prev ";"
+  print INDENTATION prev ";"
+  print INDENTATION "}"
   print "}"
 }
