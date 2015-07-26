@@ -36,12 +36,10 @@ By default JGivenGherkin uses four spaces to indent. You can change this by open
 
 ## Limitations
 
-### Variables
-
 - English language only.
+- Only features with one scenario are properly supported.
 - Only one variable per line.
 - The string variable has to be the last element in the line.
-- Most closing brackets are missing.
 
 ## Example
 
@@ -81,5 +79,6 @@ The generated Java test:
             when().the_cook_mangles_everything_to_a_dough().
                 and().the_cook_fries_the_dough_in_a_pan();
 
-        then().the_resulting_meal_is_a_pan_cake();
+            then().the_resulting_meal_is_a_pan_cake();
+        }
     }
