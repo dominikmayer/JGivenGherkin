@@ -90,8 +90,8 @@ function capitalize() {
 }
 
 /^scenario: / {
-    print INDENTATION "@Test"
-    process_line("public void ", "", 0);
+    beginning = "@Test\n" INDENTATION "public void "
+    process_line(beginning, "", 0);
     prev = prev " {\n"
 }
 
@@ -103,7 +103,8 @@ function capitalize() {
   process_line(INDENTATION INDENTATION $1"().", ".", 1)
 }
 
-#/[^0-9]*/ {print $2,$3}
+# Ignore comments and empty lines.
+/^(#|\s*$)/ { next }
 
 { if (output != "") {
     print INDENTATION output

@@ -51,9 +51,9 @@ Scenario: A pancake can be fried out of an egg milk and flour
 
   Given an egg
     And some milk
-    and the ingredients "flour"
-    and 3 teaspoons of salt
-    and sugar for 1.5 Euro
+    And the ingredients "flour"
+    And 3 teaspoons of salt
+    And sugar for 1.5 Euro
    When the cook mangles everything to a dough
     And the cook fries the dough in a pan
    Then the resulting meal is a pan cake
