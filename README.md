@@ -6,19 +6,19 @@ This little awk script creates the initial JGiven setup from a Gherkin file.
 
 1. Install `gawk`.
 
-2. Download `jgivengherkin.awk` and make it executable:
+2. Download `jgivengherkin` and make it executable:
 
-        $ chmod +x jgivengherkin.awk
+        $ chmod +x jgivengherkin
 
 ## Run
 
 By default JGivenGherkin outputs the text to the console:
 
-    ./jgivengherkin.awk my_test.gherkin
+    ./jgivengherkin my_test.gherkin
 
 To save it use this command:
 
-    ./jgivengherkin.awk my_test.gherkin > my_test.java
+    ./jgivengherkin my_test.gherkin > my_test.java
 
 ## Configuration
 
