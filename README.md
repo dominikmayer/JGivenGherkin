@@ -2,6 +2,32 @@
 
 This little awk script creates the initial JGiven setup from a Gherkin file.
 
+## Install
+
+1. Install `gawk`.
+
+2. Download `jgivengherkin.awk` and make it executable:
+
+      $ chmod +x jgivengherkin.awk
+
+Depending on the location of `gawk` on your system you might need to change the first line of the script.
+
+## Run
+
+By default JGivenGherkin outputs the text to the console:
+
+    ./jgivengherkin.awk my_test.gherkin
+
+To save it use this command:
+
+    ./jgivengherkin.awk my_test.gherkin > my_test.java
+
+## Configuration
+
+By default JGivenGherkin uses four spaces to indent. You can change this by opening and editing the following line:
+
+    INDENTATION = "    ";
+
 ## Supported
 
 - Scenario

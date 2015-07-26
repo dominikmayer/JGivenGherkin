@@ -1,10 +1,10 @@
 #!/usr/local/bin/gawk -f
 BEGIN {
-  INDENTATION="    "
-  prev = ""
-  output = ""
-  allowPreviousAppending = 0
-  prevVariable = ""
+  INDENTATION = "    ";
+  prev = "";
+  output = "";
+  allowPreviousAppending = 0;
+  prevVariable = "";
 }
 
 # We convert everything to lowercase so we don't have to worry about case in the Gherkin files.
