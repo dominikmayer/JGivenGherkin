@@ -35,7 +35,6 @@ By default JGivenGherkin uses four spaces to indent. You can change this by open
 ## Limitations
 
 - English language only.
-- Only features with one scenario are properly supported.
 - Only one variable per line.
 - The string variable has to be the last element in the line.
 

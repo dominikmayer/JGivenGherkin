@@ -14,12 +14,12 @@ Scenario: A pancake can be fried out of an egg milk and flour
     And the cook fries the dough in a pan
    Then the resulting meal is a pan cake
 
-#Scenario: A pancake cannot be fried with apples and bananas
-#
-#  Given 2 bananas
-#    And 4 apples
-#   When the cook tries to mangle everything to a dough
-#   Then the resulting meal is not a pan cake
+Scenario: A pancake cannot be fried with apples and bananas
+
+  Given 2 bananas
+    And 4 apples
+   When the cook tries to mangle everything to a dough
+   Then the resulting meal is not a pan cake
 
 # Scenario Outline: Eating
 #

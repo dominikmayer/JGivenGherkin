@@ -86,12 +86,13 @@ function capitalize() {
   print "import org.junit.Test;";
   print "import com.tngtech.jgiven.junit.ScenarioTest;\n";
   print "public class " $0 "Test extends";
-  print INDENTATION "ScenarioTest<GivenSomeState, WhenSomeAction, ThenSomeOutcome> {\n";
+  print INDENTATION "ScenarioTest<GivenSomeState, WhenSomeAction, ThenSomeOutcome> {";
 }
 
 /^scenario: / {
-    beginning = "@Test\n" INDENTATION "public void "
-    process_line(beginning, "", 0);
+    beginning = "\n" INDENTATION "@Test\n" INDENTATION "public void "
+    ending = ";\n" INDENTATION "}"
+    process_line(beginning, ending, 0);
     prev = prev " {\n"
 }
 
