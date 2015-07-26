@@ -25,6 +25,7 @@ function remove_trailing_whitespace() {
 
 function process_line(beginning, previousEnding, allowAppending) {
   extract_string_variables();
+  extract_float_variables(); # must stand first
   extract_int_variables();
 
   convert_to_snake_case();
@@ -44,6 +45,14 @@ function extract_string_variables() {
     number = split($0, variables, "\"");
     prevVariable = "\"" variables[2] "\"";
     sub(/".*?"/, "")
+  }
+}
+
+function extract_float_variables() {
+  #if (match($0, /[0-9*][\.|,][0-9*]/, variables)) {
+  if (match($0, /[0-9*]\.[0-9*]/, variables)) {
+    prevVariable = variables[0];
+    sub(/[0-9*]\.[0-9*]/, "$");
   }
 }
 

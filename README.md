@@ -6,11 +6,12 @@ This little awk script creates the initial JGiven setup from a Gherkin file.
 
 - Scenario
 - Given, When, Then, And
-- String, Integer variables
+- String, Integer, Float variables
 
 ## Limitations
 
 ### Variables
 
 - English language only.
+- Only one variable per line.
 - The string variable has to be the last element in the line.
