@@ -10,8 +10,6 @@ This little awk script creates the initial JGiven setup from a Gherkin file.
 
         $ chmod +x jgivengherkin.awk
 
-Depending on the location of `gawk` on your system you might need to change the first line of the script.
-
 ## Run
 
 By default JGivenGherkin outputs the text to the console:

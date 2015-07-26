@@ -1,4 +1,5 @@
-#!/usr/local/bin/gawk -f
+#!/bin/sh
+arbitrary_long_name==0 "exec" "/usr/bin/env" "gawk" "-f" "$0" "$@"
 
 BEGIN {
   INDENTATION = "    ";
