@@ -8,7 +8,7 @@ This little awk script creates the initial JGiven setup from a Gherkin file.
 
 2. Download `jgivengherkin.awk` and make it executable:
 
-      $ chmod +x jgivengherkin.awk
+        $ chmod +x jgivengherkin.awk
 
 Depending on the location of `gawk` on your system you might need to change the first line of the script.
 
@@ -41,6 +41,7 @@ By default JGivenGherkin uses four spaces to indent. You can change this by open
 - English language only.
 - Only one variable per line.
 - The string variable has to be the last element in the line.
+- Most closing brackets are missing.
 
 ## Example
 
