@@ -1,3 +1,6 @@
+Feature: We want to cook our meal
+  We do this because we are really, really hungry.
+
 Scenario: A pancake can be fried out of an egg milk and flour
 
   Given an egg

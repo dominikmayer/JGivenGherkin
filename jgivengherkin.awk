@@ -49,7 +49,6 @@ function extract_string_variables() {
 }
 
 function extract_float_variables() {
-  #if (match($0, /[0-9*][\.|,][0-9*]/, variables)) {
   if (match($0, /[0-9*]\.[0-9*]/, variables)) {
     prevVariable = variables[0];
     sub(/[0-9*]\.[0-9*]/, "$");
@@ -68,10 +67,28 @@ function convert_to_snake_case() {
   gsub(/ /, "_");
 }
 
-# Now we convert the scenario to a JGiven method.
+function convert_to_camel_case() {
+  remove_keyword();
+  capitalize();
+  gsub(/ /, "");
+}
+
+function capitalize() {
+  for (i=1; i<=NF; ++i) {
+    $i=toupper(substr($i,1,1)) tolower(substr($i,2));
+  }
+}
+
+/^feature: / {
+  convert_to_camel_case()
+  print "import org.junit.Test;";
+  print "import com.tngtech.jgiven.junit.ScenarioTest;\n";
+  print "public class " $0 "Test extends";
+  print INDENTATION "ScenarioTest<GivenSomeState, WhenSomeAction, ThenSomeOutcome> {\n";
+}
 
 /^scenario: / {
-    print "@Test"
+    print INDENTATION "@Test"
     process_line("public void ", "", 0);
     prev = prev " {\n"
 }
@@ -87,7 +104,7 @@ function convert_to_snake_case() {
 #/[^0-9]*/ {print $2,$3}
 
 { if (output != "") {
-    print output
+    print INDENTATION output
   }
 }
 
